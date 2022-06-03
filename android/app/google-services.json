@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "768964059389",
+    "project_id": "murinhoapp-390e1",
+    "storage_bucket": "murinhoapp-390e1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768964059389:android:663af81ba1adaccfba9e94",
+        "android_client_info": {
+          "package_name": "com.murinhoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768964059389-emrqut3uhmp8kg7n9fkfhoa6qkuquorb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTOd-T9OLjD-7rSqshqy9oXoE49xqVbf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768964059389-emrqut3uhmp8kg7n9fkfhoa6qkuquorb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

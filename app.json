@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "murinhoapp",
+    "slug": "murinhoapp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "murinhoapp"
+}
