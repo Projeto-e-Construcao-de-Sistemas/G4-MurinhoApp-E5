@@ -16,10 +16,22 @@ export const Content = styled.ScrollView.attrs({
   width: 100%;
 `;
 
+export const Title = styled.Text`
+  justify-content: center;
+  font-size: 40px;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  margin-left: 50px ;
+  align-self: flex-start;
+  font-family: ${({ theme }) => theme.FONTS.TITLE};
+  color: ${({ theme }) => theme.COLORS.TEXT};
+`;
+
+
 export const SubTitle = styled.Text`
   font-size: 13px;
   font-family: ${({ theme }) => theme.FONTS.TEXT};
   color: ${({ theme }) => theme.COLORS.SUBTEXT};
   text-align: center;
-  margin: 12px 0 24px;
+  margin: 12px 0 60px;
 `;

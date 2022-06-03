@@ -7,29 +7,19 @@ import auth, { firebase } from '@react-native-firebase/auth';
 
 import firestore from '@react-native-firebase/firestore';
 
+import { EditProfileButton } from '@components/Controllers/EditProfileButton';
 import { styles } from './styles';
-import  theme  from '../../theme';
-import { ProfileHeader } from '@components/Layout/ProfileHeader';
-import { LogoutButton } from '@components/Controllers/LogoutButton';
 
-import { Header } from '@components/Layout/Header';
+import { ProfileHeader } from '@components/Layout/ProfileHeader';
+
 import { Options } from '@components/Controllers/NewOrder/styles';
 import { HomeTagProfileButton } from '@components/Controllers/HomeTagProfileButton';
 
-type Params = {
-  token: string
-}
-
-type Profile = {
-  name: string;
-  email: string;
-  family_name: string;
-  given_name: string;
-  locale: string;
-  picture: string;
-}
 
 export function Profile() {
+
+  const navigation = useNavigation();
+
 
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
@@ -134,14 +124,9 @@ export function Profile() {
       setTelefone(telefone);
       });
       }
-
-      const db = firestore()
-
-
      
 
-  const navigation = useNavigation();
-
+  
   return (
     <>
     <ProfileHeader/>
@@ -150,9 +135,11 @@ export function Profile() {
 
     <Text style={styles.title}>
             Dados pessoais:
+            
     </Text>
-
+          <EditProfileButton title="Editar Perfil" onPress={() => navigation.navigate('editprofile')} />
           <View style={styles.content}>
+          
           <Text style={styles.userdata}>
             Nome: {nome} {sobrenome}
           </Text>
@@ -170,6 +157,7 @@ export function Profile() {
           </Text>
 
         
+
         <Options> 
         <HomeTagProfileButton title="Home" onPress={() => navigation.navigate('home')} />
         <HomeTagProfileButton title="Tag" />

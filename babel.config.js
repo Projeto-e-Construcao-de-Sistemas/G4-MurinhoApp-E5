@@ -13,7 +13,8 @@ module.exports = function (api) {
             '.tsx',
             '.js',
             '.json',
-            '.svg'
+            '.svg',
+            '.png'
           ],
           alias: {
             '@components': './src/components',

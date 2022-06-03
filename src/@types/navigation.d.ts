@@ -13,6 +13,7 @@ export declare global {
       signIn: undefined;
       register: undefined;
       profile: undefined;
+      editprofile: undefined;
     }
   }
 }

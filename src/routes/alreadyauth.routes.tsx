@@ -1,10 +1,10 @@
 import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-import { SignIn } from '@screens/SignIn';
-import { Register } from '@screens/Register';
 import { Profile } from '@screens/Profile';
+import { UpdateProfile } from '@screens/UpdateProfile';
 import { Home } from "@screens/Home";
+import { SignIn } from '@screens/SignIn';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -14,6 +14,8 @@ export function AlreadyAuthRoutes() {
       <Navigator initialRouteName="home" screenOptions={{ headerShown: false }}>
         <Screen name="profile" component={Profile}/>
         <Screen name="home" component={Home}/>
+        <Screen name="editprofile" component={UpdateProfile}/>
+        
       </Navigator>
     </>
   );

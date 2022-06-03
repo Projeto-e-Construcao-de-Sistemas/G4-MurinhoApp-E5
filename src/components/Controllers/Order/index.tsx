@@ -36,27 +36,34 @@ export function Order({ data }: Props) {
       <Content>
         <Header>
           <Title>{data.description}</Title>
-          <MaterialIcons
-            name={data.status === "open" ? "hourglass-empty" : "check-circle"}
-            size={24}
-            color={data.status === "open" ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY}
-          />
+          
         </Header>
 
         <Footer>
-          <Info>
-            <MaterialIcons name="schedule" size={16} color={theme.COLORS.SUBTEXT} />
-            
-          </Info>
+          
 
           <Info>
-            <MaterialIcons name="my-location" size={16} color={theme.COLORS.SUBTEXT} />
-            <Label>
-              {data.patrimony}
-            </Label>
+            
           </Info>
         </Footer>
       </Content>
     </Container>
   );
 }
+
+/*<MaterialIcons
+name={data.status === "open" ? "hourglass-empty" : "check-circle"}
+size={24}
+color={data.status === "open" ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY}
+/> ICONE TEMPO, VIRAR PREÇO
+
+<Info>
+            <MaterialIcons name="schedule" size={16} color={theme.COLORS.SUBTEXT} />
+          </Info>
+          ICONE RELOGIO
+          
+      <MaterialIcons name="my-location" size={16} color={theme.COLORS.SUBTEXT} />
+            <Label>
+              {data.patrimony}
+            </Label> ICONE LOCALIZAÇÃO?
+*/
