@@ -1,11 +1,7 @@
 import React from 'react';
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
-import IllustrationSvg from '@assets/animations/murinhologoap.json';
-
 import { SignInForm } from '@components/Forms/SignInForm';
-
-
 
 
 import { Container, Content, SubTitle, Title } from './styles';

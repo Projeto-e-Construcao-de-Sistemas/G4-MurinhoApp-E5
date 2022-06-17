@@ -10,6 +10,9 @@ import { Container, Header, Title, Counter } from './styles';
 
 export function Orders() {
   const [status, setStatus] = useState('open');
+
+  const [tipo, setTipo] = useState('doce');
+
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState<OrderProps[]>([]);
 
@@ -17,8 +20,8 @@ export function Orders() {
     setIsLoading(true);
 
     const subscribe = firestore()
-    .collection('products')
-    .where('status', '==', status)
+    .collection('productss')
+    .where('tipo', '==', tipo)
     .onSnapshot(querySnapshot => {
       const data = querySnapshot.docs.map(doc => {
         return {
@@ -32,14 +35,14 @@ export function Orders() {
     });
 
     return () => subscribe();
-  }, [status]);
+  }, [tipo]);
 
   return (
     <Container>
-      <Filters onFilter={setStatus} />
+      <Filters onFilter={setTipo} />
 
       <Header>
-        <Title>Produtos {status === 'open' ? 'Doces' : 'Salgados'}</Title>
+        <Title>Produtos {tipo === 'doce' ? 'Doces' : 'Salgados'}</Title>
         <Counter>{orders.length}</Counter>
       </Header>
 
@@ -48,6 +51,8 @@ export function Orders() {
           <Load />
           : <FlatList
             data={orders}
+            columnWrapperStyle={{justifyContent: 'space-between'}}
+            numColumns={2}
             keyExtractor={item => item.id}
             renderItem={({ item }) => <Order data={item} />}
             contentContainerStyle={{ paddingBottom: 100 }}

@@ -14,6 +14,7 @@ export declare global {
       register: undefined;
       profile: undefined;
       editprofile: undefined;
+      details: undefined;
     }
   }
 }

@@ -16,7 +16,7 @@ export function ProfileHeader() {
 
   React.useEffect(() => {
     retornaNome();
-  },[]);
+  },[nome]); //add pelo warning, n sei se resolveu
 
   function getUserName(documentSnapshot:any) {
     return documentSnapshot.get('nome') 

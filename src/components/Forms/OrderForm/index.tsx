@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -8,26 +8,34 @@ import { Button } from '@components/Controllers/Button';
 import { TextArea } from '@components/Controllers/TextArea';
 import { Alert } from 'react-native';
 
-export function OrderForm() {
-  const [patrimony, setPatrimony] = useState('');
-  const [description, setDescription] = useState('');
+import { Picker } from '@react-native-picker/picker';
+import { Container } from '@screens/Home/styles';
 
-  const [preco, setPreco] = useState('');
+export function OrderForm() {
+
+  const [nome, setNome] = useState('');
+  const [descricao, setDescricao] = useState('');
   const [tipo, setTipo] = useState('');
+  const [valor, setValor] = useState('');
+  const [quantidade, setQuantidade] = useState('');
+  const [like, setLike] = useState(false);
+
   const [isLoading, setIsLoading] = useState(false);
 
-  // ADICIONAR INFOS PRODUTO
 
   function handleNewOrder() {
     setIsLoading(true);
+    setLike(true);
 
     firestore()
-    .collection('products')
+    .collection('productss')
     .add({
-      patrimony,
-      description,
-      status: 'open',
-      created_at: firestore.FieldValue.serverTimestamp()
+      nome,
+      descricao,
+      tipo,
+      valor,
+      quantidade,
+      like
     })
     .then(() => Alert.alert("Produto","Produto cadastrado com sucesso!"))
     .catch((error) => console.log(error))
@@ -37,10 +45,19 @@ export function OrderForm() {
   return (
     <Form>
       <Title>Adicionar Produto</Title>
-      <Input placeholder="Nome" onChangeText={setPatrimony} />
-      <TextArea placeholder="Descrição" onChangeText={setDescription} />
-      <Input placeholder="Preço" onChangeText={setPreco}/>
-      <Input placeholder="Tipo" onChangeText={setTipo}/>
+      <Input placeholder="Nome" onChangeText={setNome} />
+      <TextArea placeholder="Descrição" onChangeText={setDescricao} />
+      <Input placeholder="Preço unitário" onChangeText={setValor}/>
+      <Input placeholder="Quantidade" onChangeText={setQuantidade}/>
+      
+      <Picker 
+        selectedValue={tipo}
+        style={{ borderColor: '#01030a', borderRadius:12, borderWidth: 1 ,fontFamily:'Inter_400Regular', color:"#8D919E"  }}
+        onValueChange={(itemValue, itemIndex) =>
+          setTipo(itemValue)}>
+        <Picker.Item label="Doce" value="doce"/> 
+        <Picker.Item label="Salgado" value="salgado"/> 
+      </Picker>
       
       <Button title="Enviar produto" isLoading={isLoading} onPress={handleNewOrder} />
     </Form>

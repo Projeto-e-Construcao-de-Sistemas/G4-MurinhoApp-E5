@@ -19,13 +19,13 @@ export function Filters({ onFilter }: Props) {
         <Filter
           title="Doce"
           backgroundColor={theme.COLORS.SECONDARY}
-          onPress={() => onFilter('open')}
+          onPress={() => onFilter('doce')}
         />
 
         <Filter
           title="Salgado"
           backgroundColor={theme.COLORS.PRIMARY}
-          onPress={() => onFilter('closed')}
+          onPress={() => onFilter('salgado')}
         />
       </Options>
     </Container>

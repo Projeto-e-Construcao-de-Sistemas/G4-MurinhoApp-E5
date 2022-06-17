@@ -1,12 +1,12 @@
 import styled from 'styled-components/native';
 
 export type OrderStyleProps = {
-  status: 'open' | 'closed';
+  tipo: 'doce' | 'salgado';
 };
 
 export const Container = styled.View`
-  width: 100%;
-  height: 94px;
+  width: 45%;
+  height: 200px;
   flex-direction: row;
   overflow: hidden;
   margin-bottom: 16px;
@@ -14,7 +14,7 @@ export const Container = styled.View`
 
 export const Content = styled.View`
   flex: 1;
-  height: 94px;
+  height: 200px;
   padding: 0 15px;
   justify-content: center;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
@@ -27,8 +27,8 @@ export const Header = styled.View`
 
 export const Status = styled.View<OrderStyleProps>`
   width: 10px;
-  height: 94px;
-  background-color: ${({ theme, status }) => status === 'open' ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY};
+  height: 200px;
+  background-color: ${({ theme, tipo }) => tipo === 'doce' ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY};
 `;
 
 export const Title = styled.Text`
@@ -36,7 +36,8 @@ export const Title = styled.Text`
   font-size: 18px;
   font-family: ${({ theme }) => theme.FONTS.TITLE};
   color: ${({ theme }) => theme.COLORS.TEXT};
-  margin-bottom: 18px;
+  margin-bottom: 120px;
+  
 `;
 
 
@@ -53,8 +54,8 @@ export const Footer = styled.View`
 
 
 export const Label = styled.Text`
-  font-size: 12px;
+  font-size: 15px;
   font-family: ${({ theme }) => theme.FONTS.TEXT};
-  color: ${({ theme }) => theme.COLORS.SUBTEXT};  
+  color: ${({ theme }) => theme.COLORS.TEXT};  
   margin-left: 3px;
 `;

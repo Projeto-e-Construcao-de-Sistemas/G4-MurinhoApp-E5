@@ -31,7 +31,7 @@ export function Profile() {
 
   const userId = auth().currentUser?.uid;
 
-  React.useEffect(() => {
+  useEffect(() => {
     retornaNome();
     retornaSobrenome();
     retornaEmail();

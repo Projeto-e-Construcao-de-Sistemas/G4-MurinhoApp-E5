@@ -7,6 +7,7 @@ import { HomeTagProfileButton } from '@components/Controllers/HomeTagProfileButt
 import { OrderForm } from '@components/Forms/OrderForm';
 import { Options } from './styles';
 
+
 export function NewOrder() {
   const bottomSheetRef = useRef<BottomSheetModal>(null);
 
@@ -29,7 +30,7 @@ export function NewOrder() {
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetRef}
-          snapPoints={['72%']}   //MUDAR AQUI PRA MAIOR SE NECESSÁRIO
+          snapPoints={['82%']}   //MUDAR AQUI PRA MAIOR SE NECESSÁRIO
           style={{ padding: 24 }}
           enablePanDownToClose={true}
           backdropComponent={() => <Background />}

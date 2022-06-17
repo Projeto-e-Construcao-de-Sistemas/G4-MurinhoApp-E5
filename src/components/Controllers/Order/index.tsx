@@ -2,6 +2,8 @@ import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components/native';
 
+import { useNavigation } from '@react-navigation/native';
+
 import {
   Container,
   Status,
@@ -13,13 +15,18 @@ import {
   Footer,
   OrderStyleProps
 } from './styles';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 export type OrderProps = OrderStyleProps & {
-  id: string;
-  patrimony: string;
-  equipment: string;
-  description: string;
+  id:string;
+  nome: string;
+  descricao: string;
+  tipo: string;
+  quantidade: string;
+  valor: string;
+  foto: string;
+  like: boolean;
 }
 
 type Props = {
@@ -29,23 +36,36 @@ type Props = {
 export function Order({ data }: Props) {
   const theme = useTheme();
 
+  const navigation = useNavigation();
+
+
   return (
     <Container>
-      <Status status={data.status} />
-
+      <Status tipo={data.tipo} />
       <Content>
+      <TouchableOpacity onPress={() => navigation.navigate('details')}>
         <Header>
-          <Title>{data.description}</Title>
-          
+          <Title>{data.nome}</Title>
         </Header>
-
         <Footer>
-          
-
           <Info>
-            
+          <MaterialIcons
+            name={"monetization-on"}
+            size={24}
+            color={data.tipo === 'doce' ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY}
+            /> 
+            <Label>
+              {data.valor}
+            </Label> 
+          </Info>
+          <Info>
+          <MaterialIcons
+            name={data.like ? "favorite" : "favorite-border"}
+            size={24}
+            /> 
           </Info>
         </Footer>
+        </TouchableOpacity>
       </Content>
     </Container>
   );

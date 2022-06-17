@@ -9,7 +9,11 @@ export default {
     SUBTEXT: '#8D919E',
 
     WHITE: '#FFFFFF',
-    BORDER: '#C5CADA'
+    BORDER: '#C5CADA',
+    DARK: '#000',
+    RED: '#F52A2A',
+    LIGHT: '#F1F1F1',
+    GREEN: '#00B761',
   },
 
   colors: {
@@ -19,7 +23,8 @@ export default {
     text: '#FFFFFF',
     shape: '#252836',
     note: '#4E4E5D',
-    red: '#DB2D25'
+    red: '#DB2D25',
+    black: '#000000',
   },
 
   FONTS: {
