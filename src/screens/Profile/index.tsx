@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
-import auth, { firebase } from '@react-native-firebase/auth';
+import auth from '@react-native-firebase/auth';
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -15,11 +14,17 @@ import { ProfileHeader } from '@components/Layout/ProfileHeader';
 import { Options } from '@components/Controllers/NewOrder/styles';
 import { HomeTagProfileButton } from '@components/Controllers/HomeTagProfileButton';
 
+import { useTheme } from 'styled-components/native';
+
+import { BackButton } from '@screens/UpdateProfile/styles';
+import { MaterialIcons } from '@expo/vector-icons';
+
 
 export function Profile() {
 
   const navigation = useNavigation();
 
+  const theme = useTheme();
 
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
@@ -125,16 +130,17 @@ export function Profile() {
       });
       }
      
-
-  
   return (
     <>
+    
     <ProfileHeader/>
     
     <View style={styles.container}>
-
+    
     <Text style={styles.title}>
-            Dados pessoais:
+    <BackButton onPress={() => navigation.goBack()}>
+    <MaterialIcons name="arrow-back" size={24} color={theme.COLORS.PRIMARY} />
+    </BackButton> Dados pessoais:
             
     </Text>
           <EditProfileButton title="Editar Perfil" onPress={() => navigation.navigate('editprofile')} />
@@ -157,11 +163,11 @@ export function Profile() {
           </Text>
 
         
-
+        <Text/>
         <Options> 
-        <HomeTagProfileButton title="Home" onPress={() => navigation.navigate('home')} />
-        <HomeTagProfileButton title="Tag" />
-        <HomeTagProfileButton title="Profile" onPress={() => navigation.navigate('profile')} />
+        <HomeTagProfileButton nome="home" onPress={() => navigation.navigate('home')} title={''} />
+        <HomeTagProfileButton nome="" title="Tag" />
+        <HomeTagProfileButton nome="person" title="Profile" onPress={() => navigation.navigate('profile')} />
         </Options>
       
       </View>

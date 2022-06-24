@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -9,7 +9,17 @@ import { TextArea } from '@components/Controllers/TextArea';
 import { Alert } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
-import { Container } from '@screens/Home/styles';
+
+
+import auth, { firebase } from '@react-native-firebase/auth';
+
+import { MaterialIcons } from '@expo/vector-icons';
+
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import theme from '../../../theme';
+
 
 export function OrderForm() {
 
@@ -20,8 +30,11 @@ export function OrderForm() {
   const [quantidade, setQuantidade] = useState('');
   const [like, setLike] = useState(false);
 
+  const [id, setId] = useState('');
+
   const [isLoading, setIsLoading] = useState(false);
 
+  const userId = auth().currentUser?.uid;
 
   function handleNewOrder() {
     setIsLoading(true);
@@ -35,12 +48,16 @@ export function OrderForm() {
       tipo,
       valor,
       quantidade,
-      like
+      like,
+      userId: userId,
+      id,
     })
     .then(() => Alert.alert("Produto","Produto cadastrado com sucesso!"))
     .catch((error) => console.log(error))
     .finally(() => setIsLoading(false));
     }
+
+    
 
   return (
     <Form>
@@ -49,6 +66,20 @@ export function OrderForm() {
       <TextArea placeholder="Descrição" onChangeText={setDescricao} />
       <Input placeholder="Preço unitário" onChangeText={setValor}/>
       <Input placeholder="Quantidade" onChangeText={setQuantidade}/>
+      
+      <TouchableOpacity>
+      <View
+        style={{
+            flexDirection: 'row',
+            marginVertical: 15,
+            marginLeft:11
+          }}>
+          <MaterialIcons name='add-a-photo' size={24}/>
+        <Text style={{marginTop:3,
+        fontSize:15,
+        color: theme.COLORS.SUBTEXT}}>  Adicionar Foto </Text>
+      </View>    
+      </TouchableOpacity>    
       
       <Picker 
         selectedValue={tipo}
@@ -63,3 +94,5 @@ export function OrderForm() {
     </Form>
   );
 }
+
+

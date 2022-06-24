@@ -15,6 +15,11 @@ export declare global {
       profile: undefined;
       editprofile: undefined;
       details: undefined;
+      optionsprofile: undefined;
+      meusprodutos: undefined;
+      editdetails: undefined;
+      cart: undefined;
+      pedidoefetuado: undefined;
     }
   }
 }

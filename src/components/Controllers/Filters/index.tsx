@@ -5,7 +5,7 @@ import { Filter } from '@components/Controllers/Filter';
 import { Container, Title, Options } from './styles';
 
 type Props = {
-  onFilter: (status: string) => void;
+  onFilter: (status: string ) => void;
 }
 
 export function Filters({ onFilter }: Props) {
@@ -27,6 +27,13 @@ export function Filters({ onFilter }: Props) {
           backgroundColor={theme.COLORS.PRIMARY}
           onPress={() => onFilter('salgado')}
         />
+
+        <Filter
+          title="Favoritos"
+          backgroundColor={theme.COLORS.ROXO}
+          onPress={() => onFilter('favorito')}
+        />
+
       </Options>
     </Container>
   );

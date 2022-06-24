@@ -9,7 +9,7 @@ import { Order, OrderProps } from '@components/Controllers/Order';
 import { Container, Header, Title, Counter } from './styles';
 
 export function Orders() {
-  const [status, setStatus] = useState('open');
+  
 
   const [tipo, setTipo] = useState('doce');
 
@@ -19,8 +19,7 @@ export function Orders() {
   useEffect(() => {
     setIsLoading(true);
 
-    const subscribe = firestore()
-    .collection('productss')
+    const subscribe = firestore().collection('productss')
     .where('tipo', '==', tipo)
     .onSnapshot(querySnapshot => {
       const data = querySnapshot.docs.map(doc => {
@@ -42,7 +41,11 @@ export function Orders() {
       <Filters onFilter={setTipo} />
 
       <Header>
-        <Title>Produtos {tipo === 'doce' ? 'Doces' : 'Salgados'}</Title>
+        <Title>Produtos { tipo === 'doce' ? 
+        'Doces' 
+        : tipo === 'salgado' 
+        ? 'Salgados' 
+        : 'Favoritos' }</Title>
         <Counter>{orders.length}</Counter>
       </Header>
 

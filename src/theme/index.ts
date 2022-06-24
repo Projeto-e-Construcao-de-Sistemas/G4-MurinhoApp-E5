@@ -4,6 +4,7 @@ export default {
 
     PRIMARY: '#008000',
     SECONDARY: '#A53E4F',
+    ROXO: '#993399',
 
     TEXT: '#383B43',
     SUBTEXT: '#8D919E',
@@ -13,7 +14,15 @@ export default {
     DARK: '#000',
     RED: '#F52A2A',
     LIGHT: '#F1F1F1',
-    GREEN: '#00B761',
+    GREEN: '#008000',
+
+    white: '#FFF',
+    dark: '#000',
+    primary: '#F9813A',
+    secondary: '#fedac5',
+    light: '#E5E5E5',
+    GREY: '#908e8c',
+
   },
 
   colors: {

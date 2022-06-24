@@ -9,6 +9,7 @@ import { useFonts, Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/in
 
 import { Routes } from './src/routes';
 import theme from './src/theme';
+import { CartProvider } from './src/contexts/CartContext';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -22,10 +23,14 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      
       <ThemeProvider theme={theme}>
+      
         <StatusBar style="dark" translucent backgroundColor="transparent" />
         <Routes />
+       
       </ThemeProvider>
+      
     </GestureHandlerRootView>
   );
 }

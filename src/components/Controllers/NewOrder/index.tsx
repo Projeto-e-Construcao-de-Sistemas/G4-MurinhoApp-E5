@@ -22,15 +22,15 @@ export function NewOrder() {
   return (
     <>
       <Options> 
-        <HomeTagProfileButton title="Home" onPress={() => navigation.navigate('home')} />
-        <HomeTagProfileButton title="Tag" onPress={handleSnapPress} />
-        <HomeTagProfileButton title="Profile" onPress={() => navigation.navigate('profile')} />
+        <HomeTagProfileButton nome='home' title="Home" onPress={() => navigation.navigate('home')} />
+        <HomeTagProfileButton nome='store-mall-directory' title="Tag" onPress={handleSnapPress} />
+        <HomeTagProfileButton nome='person' title="Profile" onPress={() => navigation.navigate('optionsprofile')} />
       </Options>
 
       <BottomSheetModalProvider>
         <BottomSheetModal
           ref={bottomSheetRef}
-          snapPoints={['82%']}   //MUDAR AQUI PRA MAIOR SE NECESSÁRIO
+          snapPoints={['88%']}   //MUDAR AQUI PRA MAIOR SE NECESSÁRIO
           style={{ padding: 24 }}
           enablePanDownToClose={true}
           backdropComponent={() => <Background />}

@@ -1,23 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { View, Text, KeyboardAvoidingView, Platform } from 'react-native';
+import { useNavigation} from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
 import { useTheme } from 'styled-components/native';
 
 import firestore from '@react-native-firebase/firestore';
 
-import { ContentRow, Options, styles } from './styles';
+import { Options, styles } from './styles';
 
 import { ProfileHeader } from '@components/Layout/ProfileHeader';
 
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Button } from '@components/Controllers/Button';
 
 import { TextInput } from 'react-native-gesture-handler';
-import { BackButton, BackText } from './styles';
+import { BackButton } from './styles';
+
 import { Content } from './styles';
+
 import { HomeTagProfileButton } from '@components/Controllers/HomeTagProfileButton';
 
 
@@ -71,10 +72,6 @@ export function UpdateProfile() {
       .finally(() => setIsLoading(false));
    }
 
-   async function sairEDeslogar() {
-    
-    await navigation.navigate('signIn');
-   }
 
 
   return (
@@ -94,7 +91,7 @@ export function UpdateProfile() {
             <View style={styles.content}>
                 <Text/>
                 <Text/>
-                <TextInput placeholder="E-mail" onChangeText={setEmail} />
+                
                 <Text/>
                 <TextInput placeholder="Senha" secureTextEntry onChangeText={setPassword} />
                 <Text/>
@@ -112,8 +109,8 @@ export function UpdateProfile() {
     </KeyboardAvoidingView> 
     
             <Options>
-                <HomeTagProfileButton title="Salvar Edições" isLoading={isLoading} onPress={handleUpdateProfile} />
-                <HomeTagProfileButton title="Deletar Conta" isLoading={isLoading} onPress={handleDeleteAccount} />
+                <HomeTagProfileButton nome='save' title="Salvar Edições" isLoading={isLoading} onPress={handleUpdateProfile} />
+                <HomeTagProfileButton nome='delete' title="Deletar Conta" isLoading={isLoading} onPress={handleDeleteAccount} />
            </Options>
     </View>
     

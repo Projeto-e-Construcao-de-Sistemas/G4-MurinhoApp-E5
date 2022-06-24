@@ -54,6 +54,9 @@ type Props = {
       <TouchableOpacity onPress={() => navigations.navigate('details', data)}>
         <Header>
           <Title>{data.nome}</Title>
+          <TouchableOpacity onPress={() => navigations.navigate('editdetails', data)}>
+            <MaterialIcons name='edit' size={24}/>
+          </TouchableOpacity>
         </Header>
         <Footer>
           <Info>
@@ -76,19 +79,3 @@ type Props = {
   );
 }
 
-/*<MaterialIcons
-name={data.status === "open" ? "hourglass-empty" : "check-circle"}
-size={24}
-color={data.status === "open" ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY}
-/> ICONE TEMPO, VIRAR PREÇO
-
-<Info>
-            <MaterialIcons name="schedule" size={16} color={theme.COLORS.SUBTEXT} />
-          </Info>
-          ICONE RELOGIO
-          
-      <MaterialIcons name="my-location" size={16} color={theme.COLORS.SUBTEXT} />
-            <Label>
-              {data.patrimony}
-            </Label> ICONE LOCALIZAÇÃO?
-*/

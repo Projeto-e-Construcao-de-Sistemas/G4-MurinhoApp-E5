@@ -4,19 +4,27 @@ import { View, Text, Image } from 'react-native';
 import auth, { firebase } from '@react-native-firebase/auth';
 
 import firestore from '@react-native-firebase/firestore';
+import { useNavigation } from '@react-navigation/native';
 
 
+import { MaterialIcons } from '@expo/vector-icons';
+
+import { useTheme } from 'styled-components/native';
 import { styles } from './styles';
 
 export function ProfileHeader() {
+
+  const navigation = useNavigation();
 
   const userId = auth().currentUser?.uid;
 
   const [nome, setNome] = useState('');
 
+  const theme = useTheme();
+
   React.useEffect(() => {
     retornaNome();
-  },[nome]); //add pelo warning, n sei se resolveu
+  },[nome]);
 
   function getUserName(documentSnapshot:any) {
     return documentSnapshot.get('nome') 

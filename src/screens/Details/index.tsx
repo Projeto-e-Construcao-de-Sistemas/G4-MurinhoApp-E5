@@ -1,24 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Image, Text, StyleSheet } from 'react-native';
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
-import { Feather } from '@expo/vector-icons';
 
-import auth, { firebase } from '@react-native-firebase/auth';
+import { Alert } from 'react-native';
 
-import firestore from '@react-native-firebase/firestore';
-
-import { EditProfileButton } from '@components/Controllers/EditProfileButton';
-
-import { ProfileHeader } from '@components/Layout/ProfileHeader';
-
-import { BackButton } from '@screens/UpdateProfile/styles';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import theme from '../../theme';
 
-import { OrderStyleProps } from '@components/Controllers/Order/styles';
 
-export type OrderProps = OrderStyleProps & {
+import AsyncStorage from "@react-native-community/async-storage"
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
+export type OrderProps =  {
     id:string;
     nome: string;
     descricao: string;
@@ -34,26 +28,145 @@ export type OrderProps = OrderStyleProps & {
   };
 
 
-export function Details() {
+export function Details({route}: any) {
 
-    const navigation = useNavigation();
+  const data = route.params;
 
-    const theme = useTheme();
+  const navigation = useNavigation();
+
+  const theme = useTheme();
+
+  const [countDetails, setCountDetails] = useState(0)
+
+  function onClickAddCart(data:any){
+    const itemcart ={
+      product: data,
+      quantity: countDetails,
+      price: data.valor
+    }
+
+    
+      Alert.alert("Produto(s) adicionado(s) com sucesso!")
+
+   
+
+  }
   
   return (
-    <>
-    <View style={style.header}>
-        
-    <BackButton onPress={() => navigation.goBack()}>
-    <MaterialIcons name="arrow-back" size={24} color={theme.colors.text} />
-    </BackButton>
+   
 
-    <MaterialIcons name="shopping-cart" size={24} color={theme.colors.text} />
+    <SafeAreaView
+    style={{
+      flex: 1,
+      backgroundColor: '#FFFFFF',
+    }}>
+        <Text/>
+    <View style={style.header}>
+      <MaterialIcons name="arrow-back" size={28} onPress={() => navigation.goBack()} />
+      <MaterialIcons name="shopping-cart" size={28} onPress={() => navigation.navigate('cart', data)} />
     </View>
-    <SafeAreaView>
-        
-    </SafeAreaView>
-    </>
+    <View style={style.imageContainer}>
+      <Text> Imagem </Text>
+    </View>
+    <View style={style.detailsContainer}>
+      <View
+        style={{
+          marginLeft: 20,
+          flexDirection: 'row',
+          alignItems: 'flex-end',
+        }}>
+      </View>
+      <View
+        style={{
+          marginLeft: 20,
+          marginTop: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <Text style={{fontSize: 22, fontWeight: 'bold', marginTop:-75}}>{data.nome}</Text>
+        <View style={style.priceTag}>
+          <Text
+            style={{
+              marginLeft: 15,
+              color: '#FFFFFF',
+              fontWeight: 'bold',
+              fontSize: 16,
+            }}>
+            R${data.valor}
+          </Text>
+        </View>
+      </View>
+      <View style={{paddingHorizontal: 20, marginTop: -10}}>
+        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Descrição</Text>
+        <Text
+          style={{
+            color: 'grey',
+            fontSize: 16,
+            lineHeight: 22,
+            marginTop: 10,
+          }}>
+          {data.descricao}
+        </Text>
+        <View
+          style={{
+            marginTop: 20,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>   
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+
+             <TouchableOpacity onPress={() => setCountDetails(countDetails - 1)}>  
+            <View style={style.borderBtn}>
+              <Text style={style.borderBtnText}> - </Text>
+            </View>
+            </TouchableOpacity> 
+
+            <Text
+              style={{
+                fontSize: 20,
+                marginHorizontal: 10,
+                fontWeight: 'bold',
+              }}>
+              {countDetails}
+            </Text>
+
+            <TouchableOpacity onPress={() => setCountDetails(countDetails + 1)}> 
+            <View style={style.borderBtn}>
+              <Text style={style.borderBtnText}> + </Text> 
+            </View>
+            </TouchableOpacity>
+             
+          </View>
+        </View>
+        <Text/>
+        <TouchableOpacity onPress={()=> onClickAddCart(data)}>
+        <View style={style.buyBtn}>
+          
+            <Text
+              style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'bold'}}>
+              Adicionar ao carrinho
+            </Text>
+           
+          </View>
+          </TouchableOpacity> 
+          <TouchableOpacity onPress={() => navigation.navigate('cart', data)}> 
+          <View style={style.buyBtn}>
+            <Text
+              style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'bold'}}>
+              Comprar
+            </Text>
+          </View>
+          </TouchableOpacity> 
+        <Text/>
+        <Text/>
+      </View>
+    </View>
+  </SafeAreaView>
   );
 }
 
@@ -97,7 +210,9 @@ const style = StyleSheet.create({
     },
     borderBtnText: {fontWeight: 'bold', fontSize: 28},
     buyBtn: {
-      width: 130,
+      width: 250,
+      marginBottom:5,
+      marginLeft:55,
       height: 50,
       backgroundColor: theme.COLORS.GREEN,
       justifyContent: 'center',
