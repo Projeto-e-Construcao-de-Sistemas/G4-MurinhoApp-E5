@@ -28,20 +28,20 @@ export const BackText = styled.Text`
 export const ContentRow = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
-    paddingBottom: getBottomSpace()
+    paddingBottom: getBottomSpace() 
   },
 })`
   width: 50%;
-
+  
 `;
 
 export const Content = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {
-    paddingBottom: getBottomSpace()
+    paddingBottom: getBottomSpace() 
   },
 })`
-
+  
   width: 100%;
 `;
 
@@ -57,20 +57,10 @@ export const Options = styled.View`
 `;
 
 export const styles = StyleSheet.create({
-  buyBtn: {
-    width: 250,
-    marginBottom:5,
-    marginLeft:55,
-    height: 50,
-    backgroundColor: theme.COLORS.GREEN,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 30,
-  },
   container: {
     flex: 1,
     backgroundColor: theme.colors.background,
-
+    
   },
   profile: {
     width: '100%',
@@ -94,41 +84,9 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: theme.fonts.bold,
     color: theme.colors.note,
-    fontSize: 25,
+    fontSize: 20,
     marginTop: 10,
     marginLeft: 23,
-    marginBottom:0,
-  },
-  backTitle: {
-    fontFamily: theme.fonts.bold,
-    color: theme.colors.note,
-    fontSize: 15,
-    marginTop: 10,
-    marginLeft: 23,
-    marginBottom:0,
-  },
-  textt: {
-    fontFamily: theme.fonts.medium,
-    color: theme.colors.black,
-    fontSize: 15,
-    marginTop: 10,
-    marginLeft: 23,
-    marginBottom:0,
-  },
-  code: {
-    fontFamily: theme.fonts.bold,
-    color: theme.colors.black,
-    fontSize: 18,
-    marginTop: 10,
-    marginLeft: 23,
-    marginBottom:0,
-  },
-  telefoneVendedor: {
-    fontFamily: theme.fonts.bold,
-    color: '#4086ff',
-    fontSize: 18,
-    marginTop: 4,
-    marginLeft: 15,
     marginBottom:0,
   },
   email: {
@@ -173,7 +131,7 @@ export const styles = StyleSheet.create({
   info: {
     alignItems: 'center'
   },
-
+  
 }
 
 );

@@ -25,7 +25,7 @@ export function OrderForm() {
 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [tipo, setTipo] = useState('');
+  const [tipo, setTipo] = useState('Doce');
   const [valor, setValor] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [like, setLike] = useState(false);
@@ -50,14 +50,13 @@ export function OrderForm() {
       quantidade,
       like,
       userId: userId,
-      id,
     })
     .then(() => Alert.alert("Produto","Produto cadastrado com sucesso!"))
     .catch((error) => console.log(error))
     .finally(() => setIsLoading(false));
     }
 
-    
+
 
   return (
     <Form>
@@ -66,7 +65,7 @@ export function OrderForm() {
       <TextArea placeholder="Descrição" onChangeText={setDescricao} />
       <Input placeholder="Preço unitário" onChangeText={setValor}/>
       <Input placeholder="Quantidade" onChangeText={setQuantidade}/>
-      
+
       <TouchableOpacity>
       <View
         style={{
@@ -78,21 +77,19 @@ export function OrderForm() {
         <Text style={{marginTop:3,
         fontSize:15,
         color: theme.COLORS.SUBTEXT}}>  Adicionar Foto </Text>
-      </View>    
-      </TouchableOpacity>    
-      
-      <Picker 
+      </View>
+      </TouchableOpacity>
+
+      <Picker
         selectedValue={tipo}
         style={{ borderColor: '#01030a', borderRadius:12, borderWidth: 1 ,fontFamily:'Inter_400Regular', color:"#8D919E"  }}
         onValueChange={(itemValue, itemIndex) =>
           setTipo(itemValue)}>
-        <Picker.Item label="Doce" value="doce"/> 
-        <Picker.Item label="Salgado" value="salgado"/> 
+        <Picker.Item label="Doce" value="doce"/>
+        <Picker.Item label="Salgado" value="salgado"/>
       </Picker>
-      
+
       <Button title="Enviar produto" isLoading={isLoading} onPress={handleNewOrder} />
     </Form>
   );
 }
-
-

@@ -32,7 +32,7 @@ export function Profile() {
   const [CPF, setCPF] = useState('');
   const [campus, setCampus] = useState('');
   const [telefone, setTelefone] = useState('');
-  
+
 
   const userId = auth().currentUser?.uid;
 
@@ -46,30 +46,30 @@ export function Profile() {
   },[]);
 
   function getUserName(documentSnapshot:any) {
-    return documentSnapshot.get('nome') 
+    return documentSnapshot.get('nome')
   }
 
   function getUserSurname(documentSnapshot:any) {
-    return documentSnapshot.get('sobrenome') 
+    return documentSnapshot.get('sobrenome')
   }
 
   function getUserEmail(documentSnapshot:any) {
-    return documentSnapshot.get('email') 
+    return documentSnapshot.get('email')
   }
 
   function getUserCPF(documentSnapshot:any) {
-    return documentSnapshot.get('CPF') 
+    return documentSnapshot.get('CPF')
   }
 
   function getUserCampus(documentSnapshot:any) {
-    return documentSnapshot.get('campus') 
+    return documentSnapshot.get('campus')
   }
 
   function getUserTelefone(documentSnapshot:any) {
-    return documentSnapshot.get('telefone') 
+    return documentSnapshot.get('telefone')
   }
 
-  
+
   function retornaNome()  { firestore()
     .collection('accounts')
     .doc(userId)
@@ -129,23 +129,23 @@ export function Profile() {
       setTelefone(telefone);
       });
       }
-     
+
   return (
     <>
-    
+
     <ProfileHeader/>
-    
+
     <View style={styles.container}>
-    
+
     <Text style={styles.title}>
     <BackButton onPress={() => navigation.goBack()}>
     <MaterialIcons name="arrow-back" size={24} color={theme.COLORS.PRIMARY} />
     </BackButton> Dados pessoais:
-            
+
     </Text>
           <EditProfileButton title="Editar Perfil" onPress={() => navigation.navigate('editprofile')} />
           <View style={styles.content}>
-          
+
           <Text style={styles.userdata}>
             Nome: {nome} {sobrenome}
           </Text>
@@ -162,14 +162,14 @@ export function Profile() {
            Telefone: {telefone}
           </Text>
 
-        
+
         <Text/>
-        <Options> 
+        <Options>
         <HomeTagProfileButton nome="home" onPress={() => navigation.navigate('home')} title={''} />
         <HomeTagProfileButton nome="" title="Tag" />
         <HomeTagProfileButton nome="person" title="Profile" onPress={() => navigation.navigate('profile')} />
         </Options>
-      
+
       </View>
     </View>
     </>

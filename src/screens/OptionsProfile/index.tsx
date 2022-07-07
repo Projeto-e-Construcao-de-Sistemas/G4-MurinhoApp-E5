@@ -24,7 +24,7 @@ export function OptionsProfile() {
   const navigation = useNavigation();
 
   const theme = useTheme();
-  
+
   return (
     <>
     <ProfileHeader/>
@@ -34,21 +34,21 @@ export function OptionsProfile() {
         <Text/>
         <Text/>
         <OptionsProfileButton title="Meus Produtos" onPress={() => navigation.navigate('meusprodutos')}/>
-        <OptionsProfileButton title="Minhas Compras" />
-        <OptionsProfileButton title="Minhas vendas" />
+        <OptionsProfileButton title="Minhas Compras"  onPress={() => navigation.navigate('minhasCompras')} />
+        <OptionsProfileButton title="Minhas vendas"  onPress={() => navigation.navigate('minhasVendas')} />
         <OptionsProfileButton title="Configurações" onPress={() => navigation.navigate('profile')} />
         <Text/>
         <Text/>
         <Text/>
-        <Options> 
+        <Options>
         <HomeTagProfileButton  nome='home' title="Home" onPress={() => navigation.navigate('home')} />
         <HomeTagProfileButton nome=''  title="Tag" />
         <HomeTagProfileButton nome='person'  title="Profile" />
         </Options>
-        
+
 
       </View>
-    
+
     </>
   );
 }

@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Image, Text, StyleSheet } from 'react-native';
 import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
-
+import auth, { firebase } from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+import Firestore from '@react-native-firebase/firestore';
+import CheckBox from '@react-native-community/checkbox';
 
 
 import { MaterialIcons } from '@expo/vector-icons';
 import theme from '../../theme';
-
-
-import AsyncStorage from "@react-native-community/async-storage"
+import { v1 as uuidv1 } from 'uuid';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+
+
 export type OrderProps =  {
-    id:string;
-    nome: string;
-    descricao: string;
-    tipo: string;
-    quantidade: string;
-    valor: string;
-    foto: string;
-    like: boolean;
+  id:string;
+  nome: string;
+  descricao: string;
+  tipo: string;
+  quantidade: string;
+  valor: string;
+  foto: string;
+  userId: string;
+  like: boolean;
   }
-  
+
   type Props = {
     data: OrderProps;
   };
@@ -36,24 +40,110 @@ export function Details({route}: any) {
 
   const theme = useTheme();
 
-  const [countDetails, setCountDetails] = useState(0)
+  const [countDetails, setCountDetails] = useState(0);
 
-  function onClickAddCart(data:any){
-    const itemcart ={
-      product: data,
-      quantity: countDetails,
-      price: data.valor
-    }
+  const [togglePIXCheckBox, setTogglePIXCheckBox] = useState(false);
 
-    
-      Alert.alert("Produto(s) adicionado(s) com sucesso!")
+  const [toggleDINCheckBox, setToggleDINCheckBox] = useState(false);
 
-   
+  const [telefoneComprador, setTelefoneComprador] = useState('');
 
+  const [telefoneVendedor, setTelefoneVendedor] = useState('');
+
+  let quantidade = Number(data.quantidade);
+  const [numero, setNumero] = useState('');
+
+
+            function retornaTelefoneComprador(compradorID) { firestore()
+              .collection('accounts')
+              .doc(compradorID)
+              .get()
+              .then(documentSnapshot => getUserTelefone(documentSnapshot))
+              .then(telefone => {
+                setTelefoneComprador(telefone);;
+              });
+              }
+
+              function retornaTelefoneVendedor(vendedorID) { firestore()
+                .collection('accounts')
+                .doc(vendedorID)
+                .get()
+                .then(documentSnapshot => getUserTelefone(documentSnapshot))
+                .then(telefone => {
+                  setTelefoneVendedor(telefone);;
+                });
+                }
+
+              function getUserTelefone(documentSnapshot:any) {
+                return documentSnapshot.get('telefone')
+              }
+
+  function onClickCriarPedido(data:any){
+
+        let formaDePagamento;
+        const compradorID = auth().currentUser?.uid; //id do comprador
+        const vendedorID = data.userId;
+        const codigo = Math.floor(Math.random() * (4000 - 1000) + 1000) // o código de confirmação
+        var numeroPedido=uuidv1();//DEFINE uma parte única para o ID do PEDIDO
+        let minhaCompraID = vendedorID+'-'+numeroPedido; //a id do pedido para o comprador
+
+
+        //CONFIRMA CAMPOS PREENCHIDOS
+        if(!togglePIXCheckBox && !toggleDINCheckBox){
+          Alert.alert("Escolha uma forma de pagamento");
+          return;
+        }
+        if(countDetails<=0 || countDetails > quantidade){
+          Alert.alert("Escolha uma quantidade válida");
+          return;
+        }
+
+        //DEFINE FORMA DE PAGAMENTO
+        if(togglePIXCheckBox){
+          formaDePagamento="PIX";
+        } else formaDePagamento="DINHEIRO";
+
+        quantidade = quantidade - Number(countDetails);
+
+        retornaTelefoneVendedor(vendedorID);
+
+        //REGISTRA O PEDIDO PARA O COMPRADOR
+        const resC = firestore().collection('accounts').doc(compradorID).collection('minhasCompras').doc(minhaCompraID
+        ).set({
+        item: data.nome,
+        valor: data.valor,
+        vendedorID,
+        numeroPedido, // vai ser usado para achar o id do pedido depois
+        formaDePagamento,
+        Status: 'Em aberto',
+        codigo,
+        telefoneVendedor: telefoneVendedor,
+        quantidade: countDetails
+        });
+
+        //AGORA REGISTRA O PEDIDO PARA O VENDEDOR
+        const minhaVendaID = compradorID+'-'+ numeroPedido; //a id do pedido para o vendedor
+        retornaTelefoneComprador(compradorID);
+        const resV = firestore().collection('accounts').doc(data.userId).collection('minhasVendas').doc(minhaVendaID).set(
+        {
+        item: data.nome,
+        valor: data.valor,
+        compradorID,
+        numeroPedido, // vai ser usado para achar o id do pedido depois
+        formaDePagamento,
+        Status: 'Em aberto',
+        codigo,
+        telefoneComprador,
+        quantidade: countDetails
+        });
+
+
+        const resP = firestore().collection('productss').doc(data.id).update({quantidade: quantidade.toString()})
+
+      Alert.alert("Pedido realizado com sucesso!");
   }
-  
+
   return (
-   
 
     <SafeAreaView
     style={{
@@ -63,7 +153,6 @@ export function Details({route}: any) {
         <Text/>
     <View style={style.header}>
       <MaterialIcons name="arrow-back" size={28} onPress={() => navigation.goBack()} />
-      <MaterialIcons name="shopping-cart" size={28} onPress={() => navigation.navigate('cart', data)} />
     </View>
     <View style={style.imageContainer}>
       <Text> Imagem </Text>
@@ -113,18 +202,18 @@ export function Details({route}: any) {
             marginTop: 20,
             flexDirection: 'row',
             justifyContent: 'space-between',
-          }}>   
+          }}>
           <View
             style={{
               flexDirection: 'row',
               alignItems: 'center',
             }}>
 
-             <TouchableOpacity onPress={() => setCountDetails(countDetails - 1)}>  
+             <TouchableOpacity onPress={() => setCountDetails(countDetails - 1)}>
             <View style={style.borderBtn}>
               <Text style={style.borderBtnText}> - </Text>
             </View>
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
             <Text
               style={{
@@ -134,34 +223,39 @@ export function Details({route}: any) {
               }}>
               {countDetails}
             </Text>
-
-            <TouchableOpacity onPress={() => setCountDetails(countDetails + 1)}> 
+            <TouchableOpacity onPress={() => setCountDetails(countDetails + 1)}>
             <View style={style.borderBtn}>
-              <Text style={style.borderBtnText}> + </Text> 
+              <Text style={style.borderBtnText}> + </Text>
             </View>
             </TouchableOpacity>
-             
           </View>
         </View>
         <Text/>
-        <TouchableOpacity onPress={()=> onClickAddCart(data)}>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            marginVertical: 15,
+          }}>
+              <CheckBox disabled={false}
+                value={togglePIXCheckBox}
+                onValueChange={(newValue) => setTogglePIXCheckBox(newValue)}/>
+              <Text style={{fontSize: 18}}>PIX                                  </Text>
+
+              <CheckBox disabled={false}
+            value={toggleDINCheckBox}
+            onValueChange={(newValue) => setToggleDINCheckBox(newValue)}/>
+              <Text style={{fontSize: 18}}>DINHEIRO </Text>
+        </View>
+
+        <TouchableOpacity onPress={()=> onClickCriarPedido(data)}>
         <View style={style.buyBtn}>
-          
-            <Text
-              style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'bold'}}>
-              Adicionar ao carrinho
-            </Text>
-           
-          </View>
-          </TouchableOpacity> 
-          <TouchableOpacity onPress={() => navigation.navigate('cart', data)}> 
-          <View style={style.buyBtn}>
             <Text
               style={{color: '#FFFFFF', fontSize: 18, fontWeight: 'bold'}}>
               Comprar
             </Text>
           </View>
-          </TouchableOpacity> 
+          </TouchableOpacity>
         <Text/>
         <Text/>
       </View>

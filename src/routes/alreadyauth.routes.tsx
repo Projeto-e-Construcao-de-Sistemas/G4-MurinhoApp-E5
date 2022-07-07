@@ -9,8 +9,13 @@ import { Details } from "@screens/Details";
 import { OptionsProfile } from "@screens/OptionsProfile";
 import { MyProducts } from "@screens/MyProducts";
 import { EditDetails } from "@screens/EditDetails";
-import CartScreen from "@screens/CartScreen";
 import { OrderMade } from "@screens/OrderMade";
+import { DetailsSale } from "@screens/DetailsSale";
+import { minhasCompras } from "@screens/MyPurchases";
+import { minhasVendas } from "@screens/MySales";
+
+
+
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -25,8 +30,10 @@ export function AlreadyAuthRoutes() {
         <Screen name="optionsprofile" component={OptionsProfile}/>
         <Screen name="meusprodutos" component={MyProducts}/>
         <Screen name="editdetails" component={EditDetails}/>
-        <Screen name="cart" component={CartScreen}/>
-        <Screen name="pedidoefetuado" component={OrderMade}/>
+        <Screen name="OrderMade" component={OrderMade}/>
+        <Screen name="DetailsSale" component = {DetailsSale}/>
+        <Screen name="minhasCompras" component = {minhasCompras}/>
+        <Screen name="minhasVendas" component = {minhasVendas}/>
       </Navigator>
     </>
   );

@@ -9,7 +9,7 @@ import { Order, OrderProps } from '@components/Controllers/Order';
 import { Container, Header, Title, Counter } from './styles';
 
 export function Orders() {
-  
+
 
   const [tipo, setTipo] = useState('doce');
 
@@ -27,8 +27,8 @@ export function Orders() {
           id: doc.id,
           ...doc.data()
         }
-      }) as OrderProps[]; 
-      
+      }) as OrderProps[];
+
         setOrders(data);
         setIsLoading(false);
     });
@@ -41,10 +41,10 @@ export function Orders() {
       <Filters onFilter={setTipo} />
 
       <Header>
-        <Title>Produtos { tipo === 'doce' ? 
-        'Doces' 
-        : tipo === 'salgado' 
-        ? 'Salgados' 
+        <Title>Produtos { tipo === 'doce' ?
+        'Doces'
+        : tipo === 'salgado'
+        ? 'Salgados'
         : 'Favoritos' }</Title>
         <Counter>{orders.length}</Counter>
       </Header>

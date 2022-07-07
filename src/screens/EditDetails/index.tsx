@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, SafeAreaView, Text, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { useNavigation, useTheme } from '@react-navigation/native';
 
- 
+
 import { MaterialIcons } from '@expo/vector-icons';
 import theme from '../../theme';
 
@@ -24,7 +24,7 @@ export type OrderProps =  {
     foto: string;
     like: boolean;
   }
-  
+
   type Props = {
     data: OrderProps;
   };
@@ -36,14 +36,14 @@ export function EditDetails(this: any, {route}: any) {
 
   const navigation = useNavigation();
 
-  const theme = useTheme(); 
+  const theme = useTheme();
 
-  const [nome, setNome] = useState('');
-  const [descricao, setDescricao] = useState('');
-  const [quantidade, setQuantidade] = useState('');
+  const [nome, setNome] = useState(data.nome);
+  const [descricao, setDescricao] = useState(data.descricao);
+  const [quantidade, setQuantidade] = useState(data.quantidade);
   const [valor, setValor] = useState('');
-  
 
+/*
   async function handleUpdateProduct() {
 
     var snapshot = await firestore()
@@ -51,7 +51,7 @@ export function EditDetails(this: any, {route}: any) {
     .get()
 
     snapshot.docs.map((doc) => {
-    
+
     const product = doc.data();
     product.id = doc.id;
 
@@ -66,15 +66,15 @@ export function EditDetails(this: any, {route}: any) {
     });
   }
 
-
+*/
   function updateProduct() {
      firestore()
       .collection('productss')
       .doc(data.id)
       .update({
-      nome, 
-      valor,
-      descricao
+      nome: nome,
+      valor: valor,
+      descricao: descricao
     })
     .then(() => navigation.navigate('meusprodutos'))
     .catch((error) => console.log(error));
@@ -89,21 +89,21 @@ export function EditDetails(this: any, {route}: any) {
       .catch((error) => console.log(error));
   }
 
-  
-  
+
+
   return (
     <SafeAreaView
     style={{
       flex: 1,
       backgroundColor: '#FFFFFF',
     }}>
-        
+
         <Text/>
     <View style={style.header}>
       <MaterialIcons name="arrow-back" size={28} onPress={() => navigation.goBack()} />
-      <HomeTagProfileButton nome='save' title="Salvar Edições" onPress={handleUpdateProduct} />
+      <HomeTagProfileButton nome='save' title="Salvar Edições" onPress={updateProduct} />
       <HomeTagProfileButton nome='delete' title="Deletar Produto" onPress={handleDeleteProduct} />
-    </View> 
+    </View>
     <View style={style.imageContainer}>
       <Text> EDITAR IMAGEM </Text>
     </View>
@@ -130,12 +130,12 @@ export function EditDetails(this: any, {route}: any) {
         <TextInput placeholder="Adicionar nova descrição" onChangeText={setDescricao}  />
 
         </View>
-          
+
         <Text/>
         <Text/>
-        
-      </View> 
-   
+
+      </View>
+
   </SafeAreaView>
   );
 }

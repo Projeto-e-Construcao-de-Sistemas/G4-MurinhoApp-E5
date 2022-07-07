@@ -45,12 +45,11 @@ export function UpdateProfile() {
       .collection('accounts')
       .doc(userId)
       .update({
-      email,
-      password,
-      nome,
-      sobrenome, 
-      telefone,
-      CPF,
+      email: email,
+      password: password,
+      nome: nome,
+      sobrenome: sobrenome,
+      telefone: telefone,
       campus
     })
     .then(() => navigation.navigate('home'))
@@ -77,10 +76,10 @@ export function UpdateProfile() {
   return (
     <>
     <ProfileHeader/>
-    
+
     <View style={styles.container}>
 
-    
+
     <Text style={styles.title}>
     <BackButton onPress={() => navigation.goBack()}>
     <MaterialIcons name="arrow-back" size={24} color={theme.COLORS.PRIMARY} />
@@ -91,7 +90,7 @@ export function UpdateProfile() {
             <View style={styles.content}>
                 <Text/>
                 <Text/>
-                
+
                 <Text/>
                 <TextInput placeholder="Senha" secureTextEntry onChangeText={setPassword} />
                 <Text/>
@@ -106,14 +105,14 @@ export function UpdateProfile() {
                 <TextInput placeholder="Campus" onChangeText={setCampus}/>
             </View>
         </Content>
-    </KeyboardAvoidingView> 
-    
+    </KeyboardAvoidingView>
+
             <Options>
                 <HomeTagProfileButton nome='save' title="Salvar Edições" isLoading={isLoading} onPress={handleUpdateProfile} />
                 <HomeTagProfileButton nome='delete' title="Deletar Conta" isLoading={isLoading} onPress={handleDeleteAccount} />
            </Options>
     </View>
-    
+
     </>
   );
   }
