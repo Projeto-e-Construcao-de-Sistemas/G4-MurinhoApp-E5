@@ -4,7 +4,6 @@ import { useNavigation, useRoute, useTheme } from '@react-navigation/native';
 import auth, { firebase } from '@react-native-firebase/auth';
 import { Alert } from 'react-native';
 import firestore from '@react-native-firebase/firestore';
-import Firestore from '@react-native-firebase/firestore';
 import CheckBox from '@react-native-community/checkbox';
 
 
@@ -51,10 +50,11 @@ export function Details({route}: any) {
   const [telefoneVendedor, setTelefoneVendedor] = useState('');
 
   let quantidade = Number(data.quantidade);
-  const [numero, setNumero] = useState('');
 
 
-            function retornaTelefoneComprador(compradorID) { firestore()
+  const compradorID = auth().currentUser?.uid; //id do comprador
+
+            async function retornaTelefoneComprador() { await firestore()
               .collection('accounts')
               .doc(compradorID)
               .get()
@@ -64,24 +64,25 @@ export function Details({route}: any) {
               });
               }
 
-              function retornaTelefoneVendedor(vendedorID) { firestore()
+              async function retornaTelefoneVendedor() { await firestore()
                 .collection('accounts')
-                .doc(vendedorID)
+                .doc(data.userId)
                 .get()
                 .then(documentSnapshot => getUserTelefone(documentSnapshot))
                 .then(telefone => {
                   setTelefoneVendedor(telefone);;
                 });
                 }
-
               function getUserTelefone(documentSnapshot:any) {
                 return documentSnapshot.get('telefone')
               }
 
+              retornaTelefoneVendedor();
+              retornaTelefoneComprador();
+
   function onClickCriarPedido(data:any){
 
         let formaDePagamento;
-        const compradorID = auth().currentUser?.uid; //id do comprador
         const vendedorID = data.userId;
         const codigo = Math.floor(Math.random() * (4000 - 1000) + 1000) // o código de confirmação
         var numeroPedido=uuidv1();//DEFINE uma parte única para o ID do PEDIDO
@@ -105,8 +106,6 @@ export function Details({route}: any) {
 
         quantidade = quantidade - Number(countDetails);
 
-        retornaTelefoneVendedor(vendedorID);
-
         //REGISTRA O PEDIDO PARA O COMPRADOR
         const resC = firestore().collection('accounts').doc(compradorID).collection('minhasCompras').doc(minhaCompraID
         ).set({
@@ -117,13 +116,12 @@ export function Details({route}: any) {
         formaDePagamento,
         Status: 'Em aberto',
         codigo,
-        telefoneVendedor: telefoneVendedor,
+        telefoneVendedor,
         quantidade: countDetails
         });
 
         //AGORA REGISTRA O PEDIDO PARA O VENDEDOR
         const minhaVendaID = compradorID+'-'+ numeroPedido; //a id do pedido para o vendedor
-        retornaTelefoneComprador(compradorID);
         const resV = firestore().collection('accounts').doc(data.userId).collection('minhasVendas').doc(minhaVendaID).set(
         {
         item: data.nome,

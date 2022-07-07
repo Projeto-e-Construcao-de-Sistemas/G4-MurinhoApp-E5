@@ -38,23 +38,6 @@ export function OrderMade(this: any, {route}: any) {
     const theme = useTheme();
 
 
-
-    function retornaTelefoneVendedor() { firestore()
-      .collection('accounts')
-      .doc(data.userId)
-      .get()
-      .then(documentSnapshot => getUserTelefone(documentSnapshot))
-      .then(telefone => {
-      setTelefoneVendedor(telefone);
-      });
-      }
-
-      function getUserTelefone(documentSnapshot:any) {
-        return documentSnapshot.get('telefone')
-      }
-
-    retornaTelefoneVendedor();
-
     function handleDeleteOrder(){
       const compradorID= auth().currentUser?.uid;
       const vendedorID  = data.vendedorID;
@@ -101,7 +84,7 @@ export function OrderMade(this: any, {route}: any) {
          style={{color: '#4086ff',
                  marginLeft: 60 }}/>
          <Text/>
-         <Text style={styles.telefoneVendedor}> {telefoneVendedor}</Text>
+         <Text style={styles.telefoneVendedor}> {data.telefoneVendedor}</Text>
          </View>
          <Text/>
 
