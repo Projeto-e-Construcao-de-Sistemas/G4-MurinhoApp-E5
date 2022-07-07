@@ -11,7 +11,7 @@ import { useTheme } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { MaterialIcons } from '@expo/vector-icons';
 
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 
 
 
@@ -37,6 +37,7 @@ export function OrderMade(this: any, {route}: any) {
 
     const theme = useTheme();
 
+    const numeroTel="5521"+data.telefoneVendedor;
 
     function handleDeleteOrder(){
       const compradorID= auth().currentUser?.uid;
@@ -80,11 +81,27 @@ export function OrderMade(this: any, {route}: any) {
                 flexDirection: 'row',
                 marginVertical: 15,
               }}>
+                 <TouchableOpacity style={{
+                   flexDirection: 'row',
+                   marginVertical: 15,
+                 }} onPress={()=>Linking.canOpenURL("whatsapp://send?text=oi").then(supported => {
+    if (supported) {
+      return Linking.openURL(
+        "whatsapp://send?phone="+numeroTel+"&text=Oi,comprei%20um%20produto%20seu"
+      );
+    } else {
+      return Linking.openURL(
+        "https://api.whatsapp.com/send?phone="+numeroTel+"&text=Oi,comprei%20um%20produto%20seu"
+      );
+    }
+  })
+}>
          <FontAwesome5 name='whatsapp' size={30}
          style={{color: '#4086ff',
                  marginLeft: 60 }}/>
          <Text/>
-         <Text style={styles.telefoneVendedor}> {data.telefoneVendedor}</Text>
+         <Text style={styles.telefoneVendedor}>{data.telefoneVendedor}</Text>
+            </TouchableOpacity>
          </View>
          <Text/>
 
