@@ -39,6 +39,10 @@ export function OrderForm() {
   function handleNewOrder() {
     setIsLoading(true);
     setLike(true);
+    if(!nome.match("^.+$")) {Alert.alert("Digite um nome para o produto"); setIsLoading(false); return;}
+    if(!descricao.match("^.{1,20}$")) {Alert.alert("Digite uma descrição de até 20 caracteres para o produto");setIsLoading(false); return;}
+    if(!valor.match("^[0-9]+$")) {Alert.alert("Digite um valor válido para o produto"); setIsLoading(false);return;}
+    if(!quantidade.match("^[0-9]+$")) {Alert.alert("Digite uma quantidade válida para o produto"); setIsLoading(false);return;}
 
     firestore()
     .collection('productss')

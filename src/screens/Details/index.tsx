@@ -54,6 +54,8 @@ export function Details({route}: any) {
 
   const compradorID = auth().currentUser?.uid; //id do comprador
 
+  
+
             async function retornaTelefoneComprador() { await firestore()
               .collection('accounts')
               .doc(compradorID)
