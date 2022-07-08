@@ -53,6 +53,9 @@ type Props = {
             </Label>
           </Info>
         </Footer>
+        <Footer><Info><Info><Label>
+          {data.Status}
+        </Label></Info></Info></Footer>
         </TouchableOpacity>
       </Content>
     </Container>

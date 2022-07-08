@@ -91,7 +91,7 @@ function handleDeleteOrder(){
     <View style={{marginTop:'5%'}}>
     <Text style={styles.backTitle} >
     <BackButton onPress={() => navigation.goBack()}>
-    <MaterialIcons name="arrow-back" size={24} color={theme.colors.primary} />
+    <MaterialIcons name="arrow-back" size={24} color={'green'} />
     </BackButton>  Minhas vendas </Text>
     <Text/>
     </View>
@@ -121,6 +121,8 @@ function handleDeleteOrder(){
             </TouchableOpacity>
           </View>
           <View style={{marginTop:'5%'}}>
+          <Text  style={styles.textt}>Forma de pagamento: {data.formaDePagamento}</Text>
+          <Text  style={styles.textt}>Quantidade solcitada: {data.quantidade}</Text>
             <Text style={styles.textt}>Insira o código dado ao comprador para concluir a entrega.</Text>
           </View>
 

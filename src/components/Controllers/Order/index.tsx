@@ -59,15 +59,10 @@ type Props = {
           <Info>
             <Label>
               R$ {data.valor},00
-            </Label> 
+            </Label>
           </Info>
           <Info>
-          <TouchableOpacity onPress={() => toggleLike(data)}>
-          <MaterialIcons
-            name={data.like ? "favorite" : "favorite-border"}
-            size={24}
-            /> 
-            </TouchableOpacity>
+          <Label>QTD:{data.quantidade}</Label>
           </Info>
         </Footer>
         </TouchableOpacity>
@@ -86,7 +81,7 @@ color={data.status === "open" ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY}
             <MaterialIcons name="schedule" size={16} color={theme.COLORS.SUBTEXT} />
           </Info>
           ICONE RELOGIO
-          
+
       <MaterialIcons name="my-location" size={16} color={theme.COLORS.SUBTEXT} />
             <Label>
               {data.patrimony}

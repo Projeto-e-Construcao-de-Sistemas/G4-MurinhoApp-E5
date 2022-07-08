@@ -49,12 +49,13 @@ export function Details({route}: any) {
 
   const [telefoneVendedor, setTelefoneVendedor] = useState('');
 
-  let quantidade = Number(data.quantidade);
+  let [QTD,setQTD] = useState(Number(data.quantidade));
+  let quantidade = Number(data.quantidade)
 
 
   const compradorID = auth().currentUser?.uid; //id do comprador
 
-  
+
 
             async function retornaTelefoneComprador() { await firestore()
               .collection('accounts')
@@ -107,6 +108,7 @@ export function Details({route}: any) {
         } else formaDePagamento="DINHEIRO";
 
         quantidade = quantidade - Number(countDetails);
+        setQTD(quantidade);
 
         //REGISTRA O PEDIDO PARA O COMPRADOR
         const resC = firestore().collection('accounts').doc(compradorID).collection('minhasCompras').doc(minhaCompraID
@@ -136,11 +138,16 @@ export function Details({route}: any) {
         telefoneComprador,
         quantidade: countDetails
         });
+          Alert.alert("Pedido realizado com sucesso!");
+        if(quantidade<=0){
+          const resP = firestore().collection('productss').doc(data.id).delete();
+          navigation.goBack();
+        }
+        else{
+          const resP = firestore().collection('productss').doc(data.id).update({quantidade: quantidade.toString()})
+        }
 
 
-        const resP = firestore().collection('productss').doc(data.id).update({quantidade: quantidade.toString()})
-
-      Alert.alert("Pedido realizado com sucesso!");
   }
 
   return (
@@ -228,6 +235,7 @@ export function Details({route}: any) {
               <Text style={style.borderBtnText}> + </Text>
             </View>
             </TouchableOpacity>
+            <Text style={{marginLeft:'25%',fontSize: 22, fontWeight: 'bold' }}> QTD: {QTD}</Text>
           </View>
         </View>
         <Text/>

@@ -76,11 +76,7 @@ export function OrderMade(this: any, {route}: any) {
 
          <Text/>
          <Text/>
-         <View
-              style={{
-                flexDirection: 'row',
-                marginVertical: 15,
-              }}>
+         <View>
                  <TouchableOpacity style={{
                    flexDirection: 'row',
                    marginVertical: 15,
@@ -106,14 +102,13 @@ export function OrderMade(this: any, {route}: any) {
          <Text/>
 
          <Text  style={styles.textt}>Sua forma de pagamento: {data.formaDePagamento}</Text>
+         <Text  style={styles.textt}>Quantidade que você pediu: {data.quantidade}</Text>
          <Text style={styles.textt}>Assim que realizar o pagamento,</Text>
          <Text style={styles.textt}>forneça o seguinte código ao vendedor.</Text>
 
          <Text/>
          <Text/>
          <Text style={styles.code}>                               {data.codigo}</Text>
-         <Text/>
-         <Text/>
          <Text/>
          <Text/>
          <View>

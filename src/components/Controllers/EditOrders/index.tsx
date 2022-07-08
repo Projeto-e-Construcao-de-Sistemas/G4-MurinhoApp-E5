@@ -3,7 +3,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useTheme } from 'styled-components/native';
 
 import { useNavigation } from '@react-navigation/native';
-
 import {
   Container,
   Status,
@@ -41,11 +40,6 @@ type Props = {
 
   const navigations = useNavigation();
 
-  function toggleLike(data: OrderProps) {
-    setLike((prevState) => !prevState)
-    data.like = like;
-  }
-
 
   return (
     <Container>
@@ -62,15 +56,10 @@ type Props = {
           <Info>
             <Label>
               R$ {data.valor},00
-            </Label> 
+            </Label>
           </Info>
           <Info>
-          <TouchableOpacity onPress={() => toggleLike(data)}>
-          <MaterialIcons
-            name={data.like ? "favorite" : "favorite-border"}
-            size={24}
-            /> 
-            </TouchableOpacity>
+        <Label>QTD:{data.quantidade}</Label>
           </Info>
         </Footer>
         </TouchableOpacity>
@@ -78,4 +67,3 @@ type Props = {
     </Container>
   );
 }
-

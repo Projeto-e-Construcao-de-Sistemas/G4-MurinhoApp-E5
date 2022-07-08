@@ -28,12 +28,6 @@ export function Filters({ onFilter }: Props) {
           onPress={() => onFilter('salgado')}
         />
 
-        <Filter
-          title="Favoritos"
-          backgroundColor={theme.COLORS.ROXO}
-          onPress={() => onFilter('favorito')}
-        />
-
       </Options>
     </Container>
   );
