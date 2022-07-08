@@ -43,7 +43,7 @@ export function Orders() {
       <Header>
         <Title>Produtos { tipo === 'doce' ?
         'Doces'
-        : tipo === 'salgado'}</Title>
+        :  'Salgados'}</Title>
         <Counter>{orders.length}</Counter>
       </Header>
 

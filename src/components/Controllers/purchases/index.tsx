@@ -35,6 +35,7 @@ type Props = {
 
  export function Compra({data}:Props) {
   const theme = useTheme();
+  const id=data.numeroPedido.substring(0,5);
 
   const navigations = useNavigation();
 
@@ -51,11 +52,14 @@ type Props = {
             <Label>
               R$ {data.valor},00
             </Label>
+            <Label style={{marginLeft:'10%'}}>{id}</Label>
           </Info>
         </Footer>
-        <Footer><Info><Info><Label>
+        <Footer><Info><Info>
+        <Label>
           {data.Status}
-        </Label></Info></Info></Footer>
+        </Label>
+        </Info></Info></Footer>
         </TouchableOpacity>
       </Content>
     </Container>
