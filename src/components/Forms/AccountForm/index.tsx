@@ -27,7 +27,7 @@ export function AccountForm() {
   var telefone='';
   var campus='';
   const [isLoading, setIsLoading] = useState(false);
-  var [city,setcity] = useState('');
+  var [state,setState] = useState('');
   var [rj,setRJ]=useState(false);
 
   //const myTimeout = setTimeout(handleNewAccount, 5000);
@@ -65,10 +65,10 @@ export function AccountForm() {
        if(!cep.match(/^\d{5}-?\d{3}$/)) return;
 
       getAddressByCEP(cep).then(address => {
-      setcity(address.city);;
+      setState(address.state);;
    });
-   if(city!="Rio de Janeiro"){setRJ(false); Alert.alert(city+" --> Você não pode frequentar a UNIRIO sem estar no Rio!")}
-   else{setRJ(true);Alert.alert(city+" --> Tudo ok!")}
+   if(state!="RJ"){setRJ(false); Alert.alert(state+" --> Você não pode frequentar a UNIRIO sem estar no Rio!")}
+   else{setRJ(true);Alert.alert(state+" --> Tudo ok!")}
    }
 
    const loginValidationSchema = yup.object().shape({

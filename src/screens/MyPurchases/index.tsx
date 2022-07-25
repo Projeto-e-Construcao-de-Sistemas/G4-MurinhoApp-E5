@@ -19,7 +19,6 @@ import { Text } from 'react-native';
 import { styles } from './styles';
 
 export function minhasCompras() {
-
     const [compras, setcompras] = useState<compraProps[]>([]);
 
     const navigation = useNavigation();

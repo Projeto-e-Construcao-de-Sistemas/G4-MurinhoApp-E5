@@ -36,6 +36,7 @@ export type vendaProps =  {
 
 export function DetailsSale({route}: any) {
 
+
   const data = route.params;
 
   const navigation = useNavigation();
@@ -82,7 +83,6 @@ function handleDeleteOrder(){
   }
 
   return (
-
     <SafeAreaView
     style={{
       flex: 1,
