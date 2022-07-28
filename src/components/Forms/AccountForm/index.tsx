@@ -21,7 +21,6 @@ export function AccountForm() {
   var nome='';
   var sobrenome='';
   var telefone='';
-  var campus='';
   const [isLoading, setIsLoading] = useState(false);
   var [state,setState] = useState('');
   var [rj,setRJ]=useState(false);
@@ -30,8 +29,13 @@ export function AccountForm() {
 
    async function handleNewAccount() {
 
+     if(state==""){
+       Alert.alert("Você precisa checar seu CEP");
+       return;
+     }
+
      if(rj==false){
-       Alert.alert("Você precisa checar seu CEP, e ter residência no Rio de Janeiro");
+       Alert.alert(" Você não pode frequentar a UNIRIO sem estar no Rio!");
        return;
      }
 
@@ -47,8 +51,7 @@ export function AccountForm() {
       nome,
       sobrenome,
       telefone,
-      CEP,
-      campus
+      CEP
     })
     .then(() => Alert.alert("Conta", "Cadastrado com sucesso!"))
     .catch((error) => console.log(error))
@@ -57,13 +60,20 @@ export function AccountForm() {
 
   }
 
-     function getcity(cep){
 
-       if(!cep.match(/^\d{5}-?\d{3}$/)) return;
+  function getEstado(cep){
+          getAddressByCEP(cep).then(address => {
+          setState(address.state);
+       });
+  }
 
-      getAddressByCEP(cep).then(address => {
-      setState(address.state);;
-   });
+     async function getcity(cep){
+
+       if(!cep.match(/^\d{5}-?\d{3}$/)){Alert.alert("CEP inválido"); return;}
+
+       getEstado(cep);
+       getEstado(cep);
+
    if(state!="RJ"){setRJ(false); Alert.alert(state+" --> Você não pode frequentar a UNIRIO sem estar no Rio!")}
    else{setRJ(true);Alert.alert(state+" --> Tudo ok!")}
    }
@@ -98,11 +108,11 @@ export function AccountForm() {
     <Formik
              validationSchema={loginValidationSchema}
              initialValues={{ nome: '',sobrenome:'', email: '',
-             senha: '', CEP: '', telefone: '', campus: '' }}
+             senha: '', CEP: '', telefone: ''}}
              onSubmit={values => { email = values.email; senha = values.senha;
                nome = values.nome;sobrenome = values.sobrenome;
                CEP = values.CEP; telefone = values.telefone;
-               campus = values.campus; handleNewAccount()}}
+                handleNewAccount()}}
             >
              {({handleChange,handleBlur,handleSubmit,values, errors,isValid, }) => (
                <View>

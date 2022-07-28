@@ -43,6 +43,7 @@ export function EditDetails(this: any, {route}: any) {
   const [quantidade, setQuantidade] = useState(data.quantidade);
   const [valor, setValor] = useState('');
 
+
 /*
   async function handleUpdateProduct() {
 
@@ -72,9 +73,9 @@ export function EditDetails(this: any, {route}: any) {
       .collection('productss')
       .doc(data.id)
       .update({
-      nome: nome,
-      valor: valor,
-      descricao: descricao
+      quantidade:quantidade==''? data.quantidade: quantidade,
+      valor: valor==''? data.valor: valor,
+      descricao: descricao==''? data.descricao: descricao
     })
     .then(() => navigation.navigate('meusprodutos'))
     .catch((error) => console.log(error));
@@ -108,28 +109,28 @@ export function EditDetails(this: any, {route}: any) {
       <Text> EDITAR IMAGEM </Text>
     </View>
     <View style={style.detailsContainer}>
+    <Text style={{fontSize: 20, fontWeight: 'bold', paddingLeft:'35%',paddingBottom:20}}>{data.nome}</Text>
+
     <View style={{paddingHorizontal: 20, marginTop: -10}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Nome</Text>
-        <Text/>
-        <TextInput placeholder="Adicionar novo nome" onChangeText={setNome} />
-        </View>
-        <Text/>
+      <Text style={{fontSize: 20, fontWeight: 'bold'}}>Descrição</Text>
+      <TextInput placeholder="Adicionar nova descrição" onChangeText={setDescricao}  />
+      <Text/>
+      </View>
 
       <View style={{paddingHorizontal: 20, marginTop: -10}}>
         <Text style={{fontSize: 20, fontWeight: 'bold'}}>Valor</Text>
-        <Text/>
         <TextInput placeholder="R$ Valor" onChangeText={setValor} />
+        <Text/>
         </View>
 
+        <View style={{paddingHorizontal: 20, marginTop: -10}}>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}>Quantidade</Text>
+            <TextInput placeholder="Mude a quantidade" onChangeText={setQuantidade} />
+            </View>
+            <Text/>
         <Text/>
 
-      <View style={{paddingHorizontal: 20, marginTop: -10}}>
-        <Text style={{fontSize: 20, fontWeight: 'bold'}}>Descrição</Text>
-        <Text/>
 
-        <TextInput placeholder="Adicionar nova descrição" onChangeText={setDescricao}  />
-
-        </View>
 
         <Text/>
         <Text/>
@@ -160,7 +161,7 @@ const style = StyleSheet.create({
       marginBottom: 7,
       borderRadius: 20,
       marginTop: 30,
-      paddingTop: 30,
+      paddingTop: 10,
     },
     line: {
       width: 25,

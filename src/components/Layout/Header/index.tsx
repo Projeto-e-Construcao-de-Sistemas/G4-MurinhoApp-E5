@@ -14,7 +14,7 @@ const keyWeather = {
   apiKey: '86c4c6cc7fc5f691516bdc852d707ecc',
 }
 
-export function Header() {  
+export function Header() {
 
   const [state, setState] = useState({
     lat: 0,
@@ -24,8 +24,9 @@ export function Header() {
 
   const [weather, setWeather] = useState(0)
 
+
   useEffect(() => {
-    getLocation()
+    getLocation();
   },[])
 
   const getLocation = async () => {
@@ -51,10 +52,10 @@ export function Header() {
             { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
         );
     }
-    
+
   }
 
-  
+
   const getWeather = async (lat:any, lon:any) => {
     if(state.lat != 0 ) {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${state.lat}&lon=${state.lon}&appid=${keyWeather.apiKey}`)
@@ -71,13 +72,13 @@ export function Header() {
   }
 
 
-  function handleSignOut() { 
+  function handleSignOut() {
     auth().signOut();
   }
-  
+
   const now = new Date(Date.now());
   var outraData = new Date();
-  outraData.setHours(now.getHours() - 3); 
+  outraData.setHours(now.getHours() - 3);
 
   const dayName = new Array ("Domingo", "Segunda", "terça", "Quarta", "Quinta", "Sexta", "Sábado")
   const monName = new Array ("janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "outubro", "novembro", "dezembro")

@@ -50,7 +50,7 @@ export function minhasVendas() {
     <Text style={styles.title}>
     <BackButton onPress={() => navigation.goBack()}>
     <MaterialIcons name="arrow-back" size={24} color={theme.COLORS.PRIMARY} />
-    </BackButton>  Opções </Text>
+    </BackButton>  Minhas Vendas </Text>
     <Text/>
 
          <FlatList

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
 import auth from '@react-native-firebase/auth';
 
@@ -29,8 +29,7 @@ export function Profile() {
   const [nome, setNome] = useState('');
   const [sobrenome, setSobrenome] = useState('');
   const [email, setEmail] = useState('');
-  const [CPF, setCPF] = useState('');
-  const [campus, setCampus] = useState('');
+  const [CEP, setCEP] = useState('');
   const [telefone, setTelefone] = useState('');
 
 
@@ -40,8 +39,7 @@ export function Profile() {
     retornaNome();
     retornaSobrenome();
     retornaEmail();
-    retornaCPF();
-    retornaCampus();
+    retornaCEP();
     retornaTelefone();
   },[]);
 
@@ -57,13 +55,10 @@ export function Profile() {
     return documentSnapshot.get('email')
   }
 
-  function getUserCPF(documentSnapshot:any) {
-    return documentSnapshot.get('CPF')
+  function getUserCEP(documentSnapshot:any) {
+    return documentSnapshot.get('CEP')
   }
 
-  function getUserCampus(documentSnapshot:any) {
-    return documentSnapshot.get('campus')
-  }
 
   function getUserTelefone(documentSnapshot:any) {
     return documentSnapshot.get('telefone')
@@ -76,7 +71,7 @@ export function Profile() {
     .get()
     .then(documentSnapshot => getUserName(documentSnapshot))
     .then(nome => {
-    setNome(nome)
+    setNome(nome);
     });
     }
 
@@ -86,7 +81,7 @@ export function Profile() {
       .get()
       .then(documentSnapshot => getUserSurname(documentSnapshot))
       .then(sobrenome => {
-      setSobrenome(sobrenome)
+      setSobrenome(sobrenome);
       });
     }
 
@@ -100,25 +95,16 @@ export function Profile() {
       });
   }
 
-  function retornaCPF()  { firestore()
+  function retornaCEP()  { firestore()
     .collection('accounts')
     .doc(userId)
     .get()
-    .then(documentSnapshot => getUserCPF(documentSnapshot))
-    .then(CPF => {
-    setCPF(CPF);
+    .then(documentSnapshot => getUserCEP(documentSnapshot))
+    .then(CEP => {
+    setCEP(CEP);
     });
   }
 
-  function retornaCampus() { firestore()
-    .collection('accounts')
-    .doc(userId)
-    .get()
-    .then(documentSnapshot => getUserCampus(documentSnapshot))
-    .then(campus => {
-    setCampus(campus);
-    });
-    }
 
     function retornaTelefone() { firestore()
       .collection('accounts')
@@ -145,7 +131,7 @@ export function Profile() {
     </Text>
           <EditProfileButton title="Editar Perfil" onPress={() => navigation.navigate('editprofile')} />
           <View style={styles.content}>
-
+          
           <Text style={styles.userdata}>
             Nome: {nome} {sobrenome}
           </Text>
@@ -153,10 +139,7 @@ export function Profile() {
             E-mail: {email}
           </Text>
           <Text style={styles.userdata}>
-            CPF: {CPF}
-          </Text>
-          <Text style={styles.userdata}>
-           Campus: {campus}
+            CEP: {CEP}
           </Text>
           <Text style={styles.userdata}>
            Telefone: {telefone}

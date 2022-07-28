@@ -216,7 +216,7 @@ export function Details({route}: any) {
               alignItems: 'center',
             }}>
 
-             <TouchableOpacity onPress={() => setCountDetails(countDetails - 1)}>
+             <TouchableOpacity onPress={() => {if(countDetails>=1) setCountDetails(countDetails - 1)}}>
             <View style={style.borderBtn}>
               <Text style={style.borderBtnText}> - </Text>
             </View>
@@ -245,12 +245,12 @@ export function Details({route}: any) {
             flexDirection: 'row',
             marginVertical: 15,
           }}>
-              <CheckBox disabled={false}
+              <CheckBox disabled={toggleDINCheckBox?true:false}
                 value={togglePIXCheckBox}
                 onValueChange={(newValue) => setTogglePIXCheckBox(newValue)}/>
               <Text style={{fontSize: 18}}>PIX                                  </Text>
 
-              <CheckBox disabled={false}
+              <CheckBox disabled={togglePIXCheckBox?true:false}
             value={toggleDINCheckBox}
             onValueChange={(newValue) => setToggleDINCheckBox(newValue)}/>
               <Text style={{fontSize: 18}}>DINHEIRO </Text>

@@ -24,8 +24,8 @@ export function SignInForm() {
     .then(() => {
       Alert.alert("Logado com sucesso!");
     })
-    .catch((error) => console.log(error))
-    
+    .catch((error) => {console.log(error); Alert.alert("Esse usuário não existe, ou a senha está incorreta"); setIsLoading(false)})
+
   }
 
   function handleForgotPassword() {
