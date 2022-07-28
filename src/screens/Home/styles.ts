@@ -7,3 +7,12 @@ export const Container = styled.View`
   padding: ${getStatusBarHeight() + 24}px 24px ${getBottomSpace() + 14}px ;
 
 `;
+
+export const Content = styled.ScrollView.attrs({
+  showsVerticalScrollIndicator: false,
+  contentContainerStyle: {
+    paddingBottom: getBottomSpace() + 48
+  },
+})`
+  width: 100%;
+`;

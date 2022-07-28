@@ -129,13 +129,12 @@ const CartScreen = ({ route }:any) => {
               <CheckBox disabled={false}
                 value={togglePIXCheckBox}
                 onValueChange={(newValue) => setTogglePIXCheckBox(newValue)}/>
-              <Text style={{fontSize: 18}}>PIX                                  </Text>
+              <Text style={{fontSize: 10 }}>PIX                                  </Text>
               
               <CheckBox disabled={false}
-            value={toggleDINCheckBox}
-            onValueChange={(newValue) => setToggleDINCheckBox(newValue)}/>
-              <Text style={{fontSize: 18}}>DINHEIRO </Text>
-              
+                value={toggleDINCheckBox}
+                onValueChange={(newValue) => setToggleDINCheckBox(newValue)}/>
+              <Text style={{fontSize: 10}}>DINHEIRO </Text>
             </View>
             
             <View style={{marginHorizontal: 30}}>

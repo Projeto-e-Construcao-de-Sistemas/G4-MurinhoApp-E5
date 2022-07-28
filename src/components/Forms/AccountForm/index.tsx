@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { Text, TextInput, View, ScrollView, Alert, StyleSheet } from 'react-native';
+import { Text, TextInput, View, Alert, StyleSheet } from 'react-native';
 
 import auth from '@react-native-firebase/auth';
 
 import { Button } from '@components/Controllers/Button';
-import { Input } from '@components/Controllers/Input';
-import { Form, Title } from './styles';
+
 import { getAddressByCEP } from 'cep-address-finder'
 import * as yup from 'yup';
 import {Formik} from 'formik';
-import ModalDropdown from 'react-native-modal-dropdown';
+
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import firestore from '@react-native-firebase/firestore';
-import { nativeViewGestureHandlerProps } from 'react-native-gesture-handler/lib/typescript/handlers/NativeViewGestureHandler';
-
-
 
 
 export function AccountForm() {
@@ -57,6 +53,7 @@ export function AccountForm() {
     .then(() => Alert.alert("Conta", "Cadastrado com sucesso!"))
     .catch((error) => console.log(error))
     .finally(() => setIsLoading(false));
+
 
   }
 

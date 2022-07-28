@@ -315,7 +315,7 @@ const style = StyleSheet.create({
       width: 250,
       marginBottom:5,
       marginLeft:55,
-      height: 50,
+      height: 40,
       backgroundColor: theme.COLORS.GREEN,
       justifyContent: 'center',
       alignItems: 'center',

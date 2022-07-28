@@ -8,14 +8,19 @@ import { Filters } from '@components/Controllers/Filters';
 import { Order, OrderProps } from '@components/Controllers/Order';
 import { Container, Header, Title, Counter } from './styles';
 
+import { Input } from './input';
+
 export function Orders() {
-
-
   const [tipo, setTipo] = useState('doce');
 
   const [isLoading, setIsLoading] = useState(false);
   const [orders, setOrders] = useState<OrderProps[]>([]);
 
+  const [searchText, setSearchText] = useState("");
+
+  const [filteredOrders, setFilteredOrders] = useState<OrderProps[]>(orders);
+
+  
   useEffect(() => {
     setIsLoading(true);
 
@@ -29,6 +34,7 @@ export function Orders() {
         }
       }) as OrderProps[];
 
+        setFilteredOrders(data);
         setOrders(data);
         setIsLoading(false);
     });
@@ -36,12 +42,36 @@ export function Orders() {
     return () => subscribe();
   }, [tipo]);
 
-  return (
-    <Container>
-      <Filters onFilter={setTipo} />
+  const searchFilter = (text: any) => {
+    if(text) {
+      const newData = orders.filter((item) => {
+        const itemData = item.nome ? 
+        item.nome.toUpperCase() : ''.toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      })
+      setFilteredOrders(newData);
+      setSearchText(text)
+    } else {
+      setFilteredOrders(orders);
+      setSearchText(text)
+    }
+  } 
 
+  return (<>
+    
+    <Input
+      value={searchText}
+      placeholder={'Busque por um produto...'}
+      onChangeText={(text) => searchFilter(text)}
+    />
+    
+    <Container>
+      
+      <Filters onFilter={setTipo} searchText={setSearchText}/>
+      
       <Header>
-        <Title>Produtos { tipo === 'doce' ?
+        <Title> Produtos { tipo === 'doce' ?
         'Doces'
         :  'Salgados'}</Title>
         <Counter>{orders.length}</Counter>
@@ -51,7 +81,7 @@ export function Orders() {
         isLoading ?
           <Load />
           : <FlatList
-            data={orders}
+            data={filteredOrders}
             columnWrapperStyle={{justifyContent: 'space-between'}}
             numColumns={2}
             keyExtractor={item => item.id}
@@ -62,5 +92,6 @@ export function Orders() {
           />
       }
     </Container>
+    </>
   );
 }
