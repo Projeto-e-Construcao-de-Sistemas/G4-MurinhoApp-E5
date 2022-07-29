@@ -187,7 +187,7 @@ function handleUpdateProfile() {
       telefone: newTelefone==''?telefone:newTelefone,
     })
     .then(() => {Alert.alert("Perfil alterado com sucesso!");
-  setNome(newNome);setSobrenome(newSobrenome);setTelefone(newTelefone)})
+    setNome(newNome);setSobrenome(newSobrenome);setTelefone(newTelefone)})
     .catch((error) => setIsLoading(false));
    }
 

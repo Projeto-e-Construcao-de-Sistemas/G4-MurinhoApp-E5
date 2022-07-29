@@ -64,8 +64,8 @@ export function Header() {
         lon: lon,
         data: data
       })
-      setWeather(Math.floor(data.main.temp - 272.15))
-      console.log('baawa',now.getMonth() )
+      setWeather(Math.floor(data.main.temp - 274.15))
+      //console.log('baawa',now.getMonth() )
     }
   }
 

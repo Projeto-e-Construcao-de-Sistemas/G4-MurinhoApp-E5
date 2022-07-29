@@ -56,10 +56,7 @@ export function AccountForm() {
     .then(() => Alert.alert("Conta", "Cadastrado com sucesso!"))
     .catch((error) => console.log(error))
     .finally(() => setIsLoading(false));
-
-
   }
-
 
   function getEstado(cep){
           getAddressByCEP(cep).then(address => {
@@ -74,8 +71,8 @@ export function AccountForm() {
        getEstado(cep);
        getEstado(cep);
 
-   if(state!="RJ"){setRJ(false); Alert.alert(state+" --> Você não pode frequentar a UNIRIO sem estar no Rio!")}
-   else{setRJ(true);Alert.alert(state+" --> Tudo ok!")}
+      if(state!="RJ"){setRJ(false); Alert.alert(state+" --> Você não pode frequentar a UNIRIO sem estar no Rio!")}
+      else{setRJ(true);Alert.alert(state+" --> Tudo ok!")}
    }
 
    const loginValidationSchema = yup.object().shape({
@@ -85,6 +82,7 @@ export function AccountForm() {
      .required('É necessário preencher todos os campos'),
    senha: yup
      .string()
+     .matches(/^.{5}.*$/, "É necessário uma senha de 6 caracteres ou mais")
      .required('É necessário preencher todos os campos'),
      CEP: yup
        .string()
