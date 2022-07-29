@@ -155,6 +155,8 @@ function handleUpdateProfile() {
 
    if (newPassword != password && newPassword!="") {
      alterSenha=true;
+
+     if(!newPassword.match(/^.{6,}$/)) {Alert.alert("A senha tem que ter 6 caracteres ou mais");return;}
         auth().currentUser?.updatePassword(newPassword).then(function() {
       Alert.alert("Senha atualizada")
       setPassword(newPassword);
@@ -167,6 +169,8 @@ function handleUpdateProfile() {
    (newNome =='' && newSobrenome=='' && newTelefone=='') ){
      if(!alterEmail && !alterSenha){Alert.alert("Nada a alterar");return;}
    }
+
+   if(!newTelefone.match(/^[0-9]?[0-9]{4}-?[0-9]{4}$/)) {Alert.alert("Telefone inválido");return;}
 
    updateFirestore(userId);
 }
