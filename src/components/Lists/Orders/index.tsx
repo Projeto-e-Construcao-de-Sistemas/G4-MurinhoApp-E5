@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 
 import firestore from '@react-native-firebase/firestore';
 
@@ -9,6 +9,7 @@ import { Order, OrderProps } from '@components/Controllers/Order';
 import { Container, Header, Title, Counter } from './styles';
 
 import { Input } from './input';
+import { Content } from '@screens/Home/styles';
 
 export function Orders() {
   const [tipo, setTipo] = useState('doce');
@@ -67,16 +68,16 @@ export function Orders() {
     />
     
     <Container>
-      
+    
       <Filters onFilter={setTipo} searchText={setSearchText}/>
       
       <Header>
-        <Title> Produtos { tipo === 'doce' ?
+        <Title> Produtos { tipo == 'doce' ?
         'Doces'
         :  'Salgados'}</Title>
         <Counter>{orders.length}</Counter>
       </Header>
-
+     
       {
         isLoading ?
           <Load />
@@ -91,7 +92,9 @@ export function Orders() {
             style={{ flex: 1 }}
           />
       }
+      
     </Container>
+    
     </>
   );
 }

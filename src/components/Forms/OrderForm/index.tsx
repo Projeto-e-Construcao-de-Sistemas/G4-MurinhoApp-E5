@@ -25,7 +25,7 @@ export function OrderForm() {
 
   const [nome, setNome] = useState('');
   const [descricao, setDescricao] = useState('');
-  const [tipo, setTipo] = useState('Doce');
+  const [tipo, setTipo] = useState('doce');
   const [valor, setValor] = useState('');
   const [quantidade, setQuantidade] = useState('');
   const [like, setLike] = useState(false);

@@ -217,7 +217,7 @@ function handleUpdateProfile() {
 
 
     <Text style={styles.title}>
-    <BackButton onPress={() => navigation.goBack()}>
+    <BackButton onPress={() => navigation.navigate('optionsprofile')}>
     <MaterialIcons name="arrow-back" size={24} color={theme.COLORS.PRIMARY} />
     </BackButton> Editar dados pessoais:
     </Text>

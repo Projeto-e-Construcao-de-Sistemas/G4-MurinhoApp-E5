@@ -1,5 +1,5 @@
 import React from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, Image, View, Text } from 'react-native';
 
 import { SignInForm } from '@components/Forms/SignInForm';
 
@@ -11,7 +11,14 @@ export function SignIn() {
     <Container>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
         <Content>
-          <Title>MurinhoApp</Title>
+          <Text/>
+        <View
+          style={{
+          flexDirection: 'row',
+          }}>
+            <Title>MurinhoApp</Title>
+            <Image source={require('../../assets/animations/logomurinho.android.png')}/>
+        </View>
           <SubTitle>Murinho virtual para estudantes da UNIRIO.</SubTitle>
           <SignInForm />
         </Content>

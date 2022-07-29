@@ -123,7 +123,7 @@ function handleDeleteOrder(){
           <View style={{marginTop:'5%'}}>
           <Text  style={styles.textt}>Forma de pagamento: {data.formaDePagamento}</Text>
           <Text  style={styles.textt}>Quantidade solcitada: {data.quantidade}</Text>
-            <Text style={styles.textt}>Insira o código dado ao comprador para concluir a entrega.</Text>
+            <Text style={styles.textt}>Insira o código fornecido pelo comprador para concluir a entrega.</Text>
           </View>
 
   </SafeAreaView>

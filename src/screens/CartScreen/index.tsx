@@ -6,7 +6,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 import CheckBox from '@react-native-community/checkbox';
 
 import { useTheme } from 'styled-components/native';
-import AsyncStorage from "@react-native-community/async-storage"
 
 import theme from '../../theme';
 
@@ -27,29 +26,11 @@ const CartScreen = ({ route }:any) => {
 
     const [count, setCount] = useState(1);
 
-    //console.log(countDetails.quantidade);
-
-    //var size = Object.keys(countDetails).length;
-
-    //console.log(size);
-
     const [price, setPrice] = useState(data.valor);
 
     const navigation = useNavigation();
 
     const theme = useTheme();
-
-    function componentDidMount() {
-
-      AsyncStorage.getItem("cart").then((cart) => {
-        if (cart !== null){
-          const cartproducts = JSON.parse(cart)
-          setDataCart(cartproducts)
-        }
-      })
-
-    }
-
     
 
   const CartCard = ({item}:any) => {

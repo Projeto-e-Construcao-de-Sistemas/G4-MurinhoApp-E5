@@ -25,7 +25,7 @@ export function AccountForm() {
   var [state,setState] = useState('');
   var [rj,setRJ]=useState(false);
 
-  //const myTimeout = setTimeout(handleNewAccount, 5000);
+  
 
    async function handleNewAccount() {
 

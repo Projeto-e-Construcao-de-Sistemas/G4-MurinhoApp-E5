@@ -11,7 +11,7 @@ import Geolocation from 'react-native-geolocation-service';
 
 
 const keyWeather = {
-  apiKey: '86c4c6cc7fc5f691516bdc852d707ecc',
+  apiKey: 'c100d13e97ab9352fb68f0b8026e6bbf',
 }
 
 export function Header() {
@@ -24,20 +24,18 @@ export function Header() {
 
   const [weather, setWeather] = useState(0)
 
-
-  useEffect(() => {
-    getLocation();
-  },[])
+  useEffect(()=> {
+    getLocation()
+  },[]);
 
   const getLocation = async () => {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
     );
-
+      
     if(granted == PermissionsAndroid.RESULTS.GRANTED) {
         Geolocation.getCurrentPosition(
             (position) => {
-              //console.log(position);
               setState({
                 lat: position.coords.latitude,
                 lon: position.coords.longitude,
@@ -60,18 +58,18 @@ export function Header() {
     if(state.lat != 0 ) {
       const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${state.lat}&lon=${state.lon}&appid=${keyWeather.apiKey}`)
       const data = await response.json();
+      console.log(data)
       setState({
         lat: lat,
         lon: lon,
         data: data
       })
-
       setWeather(Math.floor(data.main.temp - 272.15))
-      console.log('baw',now.getMonth() )
+      console.log('baawa',now.getMonth() )
     }
   }
 
-
+ 
   function handleSignOut() {
     auth().signOut();
   }
